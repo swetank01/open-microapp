@@ -1,7 +1,9 @@
 # task_service.py
 from flask import Flask, jsonify
+from flask_cors import CORS  # Import the CORS extension
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes in the app
 
 tasks = [
     {"id": 1, "title": "Task 1", "user_id": 1},
