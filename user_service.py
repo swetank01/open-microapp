@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_cors import CORS  # Import the CORS extension
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes in the app
 
 # Set up JWT
 app.config['JWT_SECRET_KEY'] = 'super-secret-key'  # Change this to a long, random string in production
