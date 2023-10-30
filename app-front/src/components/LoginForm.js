@@ -1,10 +1,12 @@
 // src/components/LoginForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useHistory hook
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -17,6 +19,12 @@ const LoginForm = () => {
       const { access_token } = response.data;
       console.log('Login successful:', response.data); // Log the response data
       
+      // Store the token (e.g., in localStorage)
+      localStorage.setItem('token', access_token);
+      
+      // Use the navigate function to redirect to the protected route
+      navigate('/dashboard'); // Navigate to the protected route after successful login
+
       // Store the token and implement further logic (e.g., redirect to dashboard)
     } catch (error) {
       console.error('Login failed:', error);
