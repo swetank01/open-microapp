@@ -1,20 +1,21 @@
 // src/components/ProtectedRoute.js
 import React from 'react';
-import { Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+const ProtectedRoute = ({ component: Component, isAuthenticated }) => {
   const navigate = useNavigate(); // Hook to programmatically navigate
 
   return (
+    
     <Routes>
     <Route
-      {...rest}
+      path=''
       element={
         isAuthenticated ? (
           <Component />
         ) : (
           // Redirect to login if not authenticated
-          navigate('/login')
+          <Navigate to="/login" />
         )
       }
     />
