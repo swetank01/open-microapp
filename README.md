@@ -9,4 +9,4 @@
 - Familiarity with RESTful APIs.
 
 ## Run App:
-(here)[./Docs/how-todos/run-app.md]
+[Follow here](./Docs/how-todos/run-app.md)
