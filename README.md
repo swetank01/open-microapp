@@ -7,3 +7,6 @@
 - Basic understanding of Python and JavaScript.
 - Python and Node.js installed on your system.
 - Familiarity with RESTful APIs.
+
+## Run App:
+(here)[./Docs/how-todos/run-app.md]
