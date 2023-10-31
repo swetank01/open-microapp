@@ -11,12 +11,15 @@ pipeline{
 		}
 		stage('docker build'){
 			steps{
-				script{
-					def dockerimage='sewani/frontend_microapp'
-					sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER} ."
+				dir('docker/frontend.Dockerfile'){
+					script{
+						def dockerimage='sewani/frontend_microapp'
+						sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER} ."
 					}
 				}
+				
 			}
+		}
 		stage('docker login'){
 			steps{
 				script{
