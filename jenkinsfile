@@ -17,7 +17,7 @@ pipeline{
 					def dockerimage='sewani/frontend_microapp:latest'
 					//docker build(${dockerimage}:${env.BUILD_NUMBER}, '-f ' + dockerfilePath)"
 					//docker build -t dockerimage, '-f ' + dockerfilePath .
-					docker build . -t ${dockerimage} -f docker/frontend.Dockerfile
+					docker build  -t ${dockerimage} '-f ' + docker/frontend.Dockerfile .
 					}
 				}
 				
