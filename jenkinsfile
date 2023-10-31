@@ -14,8 +14,9 @@ pipeline{
 				//dir('docker/frontend.Dockerfile')
 				script{
 					def dockerfilePath='docker/frontend.Dockerfile'
-					def dockerimage='sewani/frontend_microapp'
-					docker build(${dockerimage}:${env.BUILD_NUMBER}, '-f ' + dockerfilePath)"
+					def dockerimage='sewani/frontend_microapp:latest'
+					//docker build(${dockerimage}:${env.BUILD_NUMBER}, '-f ' + dockerfilePath)"
+					docker.build(dockerimage, '-f ' + dockerfilePath)
 					}
 				}
 				
