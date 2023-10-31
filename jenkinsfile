@@ -19,7 +19,9 @@ pipeline{
 					//docker build -t dockerimage, '-f ' + dockerfilePath .
 					//docker build  -t ${dockerimage} '-f ' + docker/frontend.Dockerfile .
 					//docker.build -f docker/frontend.Dockerfile -t dockerimage .
-					sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER}, '-f docker/frontend.Dockerfile' ."
+					//sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER}, '-f docker/frontend.Dockerfile' ."
+					sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER} -f docker/frontend.Dockerfile ."
+
 					}
 				}
 				
