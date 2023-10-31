@@ -14,11 +14,11 @@ pipeline{
 				//dir('docker/frontend.Dockerfile')
 				script{
 					//def dockerfilePath='docker/frontend.Dockerfile'
-					def dockerimage='sewani/frontend_microapp'
+					def dockerimage='sewani/frontend_microapp:${env.BUILD_NUMBER}'
 					//docker build(${dockerimage}:${env.BUILD_NUMBER}, '-f ' + dockerfilePath)"
 					//docker build -t dockerimage, '-f ' + dockerfilePath .
 					//docker build  -t ${dockerimage} '-f ' + docker/frontend.Dockerfile .
-					docker build -f docker/frontend.Dockerfile -t ${dockerimage}:${env.BUILD_NUMBER} .
+					docker build -f docker/frontend.Dockerfile -t ${dockerimage} .
 					}
 				}
 				
