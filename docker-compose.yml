@@ -1,0 +1,20 @@
+version: '3'
+services:
+  user-service:
+    build: 
+      context: .
+      dockerfile: ./docker/user.backend.Dockerfile
+    ports:
+      - "5000:5000"
+  task-service:
+    build:
+      context: .
+      dockerfile: ./docker/task.backend.Dockerfile
+    ports:
+      - "5001:5001"
+  frontend-service:
+    build:
+      context: .
+      dockerfile: ./docker/frontend.Dockerfile
+    ports:
+      - "3000:3000"
