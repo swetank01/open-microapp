@@ -13,7 +13,7 @@ pipeline{
 			steps{
 				script{
 					def dockerimage='sewani/frontend_microapp'
-					sh "docker build -t ${dockerimage}:${env.GIT_BRANCH}"
+					sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER}"
 					}
 				}
 			}
