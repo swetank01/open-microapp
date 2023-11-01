@@ -31,7 +31,23 @@ pipeline{
 		stage('docker login'){
 			steps{
 				script{
-					sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+					sh 'echo $Dockerhub_Credentials_PSW | docker login -u $Dockerhub_Credentials_USR --password-stdin'
+					}
+				}
+			}
+		stage('docker push'){
+			steps{
+				script{
+					def dockerimage='sewani/frontend_microapp'
+					sh'docker push ${dockerimage}:${env.BUILD_NUMBER}'
+					}
+				}
+			}
+		stage('image run'){
+			steps{
+				script{
+					def dockerImage = 'sewani/frontend_microapp'
+					sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
 					}
 				}
 			}
