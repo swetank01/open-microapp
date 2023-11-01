@@ -21,8 +21,8 @@ pipeline{
 					//docker build  -t ${dockerimage} '-f ' + docker/frontend.Dockerfile .
 					//docker.build -f docker/frontend.Dockerfile -t dockerimage .
 					//sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER}, '-f docker/frontend.Dockerfile' ."
-					sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER} -f docker/frontend.Dockerfile ."
-
+					//sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER} -f docker/frontend.Dockerfile ."
+					sh "docker build -t ${dockerimage}:${env.BRANCH} -f docker/frontend.Dockerfile ."
 					}
 				}
 				
@@ -39,7 +39,8 @@ pipeline{
 			steps{
 				script{
 					def dockerimage='sewani/frontend_microapp'
-					sh"docker push ${dockerimage}:${env.BUILD_NUMBER}"
+					//sh"docker push ${dockerimage}:${env.BUILD_NUMBER}"
+					sh"docker push ${dockerimage}:${env.BRANCH}"
 					}
 				}
 			}
@@ -47,6 +48,7 @@ pipeline{
 			steps{
 				script{
 					def dockerImage = 'sewani/frontend_microapp'
+					//sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
 					sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
 					}
 				}
