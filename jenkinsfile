@@ -39,7 +39,7 @@ pipeline{
 			steps{
 				script{
 					def dockerimage='sewani/frontend_microapp'
-					sh'docker push ${dockerimage}:${env.BUILD_NUMBER}'
+					sh"docker push ${dockerimage}:${env.BUILD_NUMBER}"
 					}
 				}
 			}
