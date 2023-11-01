@@ -21,8 +21,15 @@ pipeline{
 					//docker build  -t ${dockerimage} '-f ' + docker/frontend.Dockerfile .
 					//docker.build -f docker/frontend.Dockerfile -t dockerimage .
 					//sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER}, '-f docker/frontend.Dockerfile' ."
+					
+
+
+
+
+
 					//sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER} -f docker/frontend.Dockerfile ."
-					sh "docker build -t ${dockerimage}:${env.BRANCH} -f docker/frontend.Dockerfile ."
+					//sh "docker build -t ${dockerimage}:${env.BRANCH} -f docker/frontend.Dockerfile ."
+					sh "docker build -t ${dockerimage} -f docker/frontend.Dockerfile ."
 					}
 				}
 				
@@ -38,9 +45,12 @@ pipeline{
 		stage('docker push'){
 			steps{
 				script{
+					def branch='11-cicd-for-react-front-via-jenkins'
 					def dockerimage='sewani/frontend_microapp'
+
 					//sh"docker push ${dockerimage}:${env.BUILD_NUMBER}"
-					sh"docker push ${dockerimage}:${env.BRANCH}"
+					sh"docker tag ${dockerimage} ${dockerimage}:${branch}"
+					sh"docker push ${dockerimage}:${branch}"
 					}
 				}
 			}
@@ -49,7 +59,9 @@ pipeline{
 				script{
 					def dockerImage = 'sewani/frontend_microapp'
 					//sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
-					sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
+					//sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
+					def branch='11-cicd-for-react-front-via-jenkins'
+					sh "docker run -itd -p 3000:3000 ${dockerImage}:${branch}"
 					}
 				}
 			}
