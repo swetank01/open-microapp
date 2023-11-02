@@ -1,0 +1,46 @@
+def user_image="sewani/users_backend_microapp:11-cicd-for-react-front-via-jenkins"
+pipeline{
+	agent any
+	environment{
+		Dockerhub_Credentials=credentials("dockerhub)
+	}
+	stages{
+		stage("git checkout"){
+			steps{
+				checkout scmGit (branches: [[name: '*/11-cicd-for-react-front-via-jenkins']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
+				}
+			}
+		stage("build user image"){
+			steps{
+				script{
+
+					def image = "sewani/backend_microapp"
+					sh "docker build -t ${image} -f docker/user.backend.Dockerfile ."
+					sh "docker tag $/{image} ${user_image}"
+					}
+				}
+			}
+		stage("docker login){
+			steps{
+				script{
+					sh 'echo $Dockerhub_Credentials_PSW | docker login -u $Dockerhub_Credentials_USR --password-stdin'
+					}
+				}
+			}
+		stage("push user docker image"){
+			steps{
+				script{
+					sh "docker push ${user_image}"
+					}
+				}
+			}
+		stage("Run user image in container"){
+			steps{
+				script{
+					sh "docker run -itd -p 5000:5000 ${user_image}"
+					}
+				}
+			}
+		}
+	
+	}
