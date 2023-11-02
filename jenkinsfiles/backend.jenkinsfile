@@ -16,7 +16,7 @@ pipeline{
 
 					def image = "sewani/backend_microapp"
 					sh "docker build -t ${image} -f docker/user.backend.Dockerfile ."
-					sh "docker tag $/{image} ${user_image}"
+					sh "docker tag ${image} ${user_image}"
 					}
 				}
 			}
