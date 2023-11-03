@@ -14,9 +14,8 @@ pipeline{
 		stage("docker build"){
 			steps{
 				script{
-					def branch= sh "git rev-parse --abbrev-ref HEAD"
 					//sh "docker build -t ${task_image}:${env.BRANCH_NAME} -f docker/task.backend.Dockerfile ."
-					sh "docker build -t ${task_image}:${env.GIT_BRANCH} -f docker/task.backend.Dockerfile ."
+					sh "docker build -t ${task_image}:${env.GIT_LOCAL_BRANCH} -f docker/task.backend.Dockerfile ."
 					}
 				}
 
@@ -32,7 +31,7 @@ pipeline{
 			steps{
 				script{
 					//sh "docker push ${task_image}:${env_BRANCH_NAME}"
-					sh "docker push ${task_image}:${env.GIT_BRANCH}"
+					sh "docker push ${task_image}:${env.GIT_LOCAL_BRANCH}"
 					}
 				}
 			}
@@ -40,7 +39,7 @@ pipeline{
 			steps{
 				script{
 					//sh "docker run -itd -p 50001:5001 ${task_image}:${env_BRANCH_NAME}"
-					sh "docker run -itd -p 5001:5001 ${task_image}:${env.GIT_BRANCH}"
+					sh "docker run -itd -p 5001:5001 ${task_image}:${env.GIT_LOCAL_BRANCH}"
 					}
 				}
 			}
