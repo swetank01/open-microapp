@@ -14,7 +14,7 @@ pipeline{
 		stage("docker build"){
 			steps{
 				script{
-					sh "docker build -t ${task_image}:${env_BRANCH} -f docker/task.backend.Dockerfile ."
+					sh "docker build -t ${task_image}:${env.BRANCH} -f docker/task.backend.Dockerfile ."
 					}
 				}
 			}
