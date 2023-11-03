@@ -1,5 +1,5 @@
 //dev task_image="sewani/task_backend:11-cicd-for-react-front-via-jenkins"
-dev task-image="sewani/task_backend"
+dev task_image="sewani/task_backend"
 pipeline{
 	agent any
 	environment{
