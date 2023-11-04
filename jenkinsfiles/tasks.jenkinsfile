@@ -1,5 +1,6 @@
 //dev task_image="sewani/task_backend:11-cicd-for-react-front-via-jenkins"
 def task_image="sewani/task_backend"
+def branch="11-cicd-for-react-front-via-jenkins"
 pipeline{
 	agent any
 	environment{
@@ -15,7 +16,8 @@ pipeline{
 			steps{
 				script{
 					//sh "docker build -t ${task_image}:${env.BRANCH_NAME} -f docker/task.backend.Dockerfile ."
-					sh "docker build -t ${task_image}:${env.GIT_LOCAL_BRANCH} -f docker/task.backend.Dockerfile ."
+					//sh "docker build -t ${task_image}:${env.GIT_LOCAL_BRANCH} -f docker/task.backend.Dockerfile ."
+					sh "docker build -t ${task_image}:${branch} -f docker/task.backend.Dockerfile ."
 					}
 				}
 
@@ -31,7 +33,8 @@ pipeline{
 			steps{
 				script{
 					//sh "docker push ${task_image}:${env_BRANCH_NAME}"
-					sh "docker push ${task_image}:${env.GIT_LOCAL_BRANCH}"
+					//sh "docker push ${task_image}:${env.GIT_LOCAL_BRANCH}"
+					sh "docker push ${task_image}:${branch}"
 					}
 				}
 			}
@@ -39,7 +42,8 @@ pipeline{
 			steps{
 				script{
 					//sh "docker run -itd -p 50001:5001 ${task_image}:${env_BRANCH_NAME}"
-					sh "docker run -itd -p 5001:5001 ${task_image}:${env.GIT_LOCAL_BRANCH}"
+					//sh "docker run -itd -p 5001:5001 ${task_image}:${env.GIT_LOCAL_BRANCH}"
+					sh "docker run -itd -p 5001:5001 ${task_image}:${branch}"
 					}
 				}
 			}
