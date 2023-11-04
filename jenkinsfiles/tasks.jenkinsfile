@@ -43,6 +43,7 @@ pipeline{
 				script{
 					//sh "docker run -itd -p 50001:5001 ${task_image}:${env_BRANCH_NAME}"
 					//sh "docker run -itd -p 5001:5001 ${task_image}:${env.GIT_LOCAL_BRANCH}"
+					
 					sh "docker run -itd -p 5001:5001 ${task_image}:${branch}"
 					}
 				}
