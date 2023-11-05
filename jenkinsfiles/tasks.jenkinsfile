@@ -18,6 +18,7 @@ pipeline{
 					//sh "docker build -t ${task_image}:${env.BRANCH_NAME} -f docker/task.backend.Dockerfile ."
 					//sh "docker build -t ${task_image}:${env.GIT_LOCAL_BRANCH} -f docker/task.backend.Dockerfile ."
 					sh "docker build -t ${task_image}:${branch} -f docker/task.backend.Dockerfile ."
+					sh "echo ${branch}"
 					}
 				}
 
@@ -46,7 +47,7 @@ pipeline{
 					
 					sh "docker run -itd -p 5001:5001 ${task_image}:${branch}"
 					sh "echo ${branch}"
-					sh "echo ${branch}"
+					
 					}
 				}
 			}
