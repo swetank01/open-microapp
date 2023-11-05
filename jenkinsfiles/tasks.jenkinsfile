@@ -1,6 +1,6 @@
 //dev task_image="sewani/task_backend:11-cicd-for-react-front-via-jenkins"
 def task_image="sewani/task_backend"
-def branch="11-cicd-for-react-front-via-jenkins"
+def branch="13-jenkins-pipeline-branch-commit"
 pipeline{
 	agent any
 	environment{
@@ -9,7 +9,7 @@ pipeline{
 	stages{
 		stage("git checkout"){
 			steps{
-				checkout scmGit (branches: [[name: '*/11-cicd-for-react-front-via-jenkins']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
+				checkout scmGit (branches: [[name: '*/13-jenkins-pipeline-branch-commit']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
 				}
 			}
 		stage("docker build"){
