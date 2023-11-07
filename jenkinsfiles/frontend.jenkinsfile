@@ -47,12 +47,12 @@ pipeline{
 								}
 							}
 						}
-						else{
-							echo"No file changed"
-							}
+					else{
+						echo"No file changed.........."
 						}
 					}
 				}
+			}
 		}
 
 
