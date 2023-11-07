@@ -20,6 +20,7 @@ pipeline{
 					def filechanged1 = sh(script: "git diff app-front/package*.json", returnStdout: true).trim()
                     			def filechanged2 = sh(script: "git diff jenkinsfiles/frontend.jenkinsfile", returnStdout: true).trim()
 					echo "filechanged1: ${filechanged1}"
+
 					echo "filechanged2: ${filechanged2}"
 					if (filechanged1 || filechanged2){
 						stage('docker build'){
