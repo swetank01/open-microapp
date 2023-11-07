@@ -15,9 +15,9 @@ pipeline{
 		stage('check code change'){
 			steps{
 				script{
-					def changedfiles=sh "git diff app-front/ "
-					def filechanged1=changedfiles.contains('app-front/package*.json')
-					if (filechanged1){
+					def filechanged1=sh "git diff app-front/package*.json"
+					def filechanged2=sh "git diff jenkinsfiles/frontend.jenkinsfile"
+					if (filechanged1 || filechanged2){
 						stage('docker build'){
 							steps{
 								script{
