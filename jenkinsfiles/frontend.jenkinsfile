@@ -50,5 +50,8 @@ pipeline{
 						else{
 							echo"No file changed"
 							}
-	}
+						}
+					}
+				}
+		}
 }
