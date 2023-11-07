@@ -1,3 +1,5 @@
+def dockerimage="sewani/frontend_microapp"
+def branch="13-jenkins-pipeline-branch-commit"
 pipeline{
 	agent any 
 	environment{
@@ -7,63 +9,46 @@ pipeline{
 	stages{
 		stage('git checkout'){
 			steps{
-				checkout scmGit (branches: [[name: '*/11-cicd-for-react-front-via-jenkins']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
+				checkout scmGit (branches: [[name: '*/13-jenkins-pipeline-branch-commit']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
 			}
 		}
-		stage('docker build'){
-			steps{
-				//dir('docker/frontend.Dockerfile')
-				script{
-					//def dockerfilePath='docker/frontend.Dockerfile'
-					def dockerimage='sewani/frontend_microapp'
-					//docker build(${dockerimage}:${env.BUILD_NUMBER}, '-f ' + dockerfilePath)"
-					//docker build -t dockerimage, '-f ' + dockerfilePath .
-					//docker build  -t ${dockerimage} '-f ' + docker/frontend.Dockerfile .
-					//docker.build -f docker/frontend.Dockerfile -t dockerimage .
-					//sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER}, '-f docker/frontend.Dockerfile' ."
-					
-
-
-
-
-
-					//sh "docker build -t ${dockerimage}:${env.BUILD_NUMBER} -f docker/frontend.Dockerfile ."
-					//sh "docker build -t ${dockerimage}:${env.BRANCH} -f docker/frontend.Dockerfile ."
-					sh "docker build -t ${dockerimage} -f docker/frontend.Dockerfile ."
-					}
-				}
-				
-			
-		}
-		stage('docker login'){
+		stage('check code change'){
 			steps{
 				script{
-					sh 'echo $Dockerhub_Credentials_PSW | docker login -u $Dockerhub_Credentials_USR --password-stdin'
-					}
-				}
-			}
-		stage('docker push'){
-			steps{
-				script{
-					def branch='11-cicd-for-react-front-via-jenkins'
-					def dockerimage='sewani/frontend_microapp'
-
-					//sh"docker push ${dockerimage}:${env.BUILD_NUMBER}"
-					sh"docker tag ${dockerimage} ${dockerimage}:${branch}"
-					sh"docker push ${dockerimage}:${branch}"
-					}
-				}
-			}
-		stage('image run'){
-			steps{
-				script{
-					def dockerImage = 'sewani/frontend_microapp'
-					//sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
-					//sh "docker run -itd -p 3000:3000 ${dockerImage}:${env.BUILD_NUMBER}"
-					def branch='11-cicd-for-react-front-via-jenkins'
-					sh "docker run -itd -p 3000:3000 ${dockerImage}:${branch}"
-					}
-				}
-			}
+					def changedfiles=sh "git diff app-front/ "
+					def filechanged1=changedfiles.contains('app-front/package*.json')
+					if (filechanged1){
+						stage('docker build'){
+							steps{
+								script{
+									sh "docker build -t ${dockerimage}:${branch} -f docker/frontend.Dockerfile ."
+									}
+								}
+							}
+						stage('docker login'){
+							steps{
+								script{
+									sh 'echo $Dockerhub_Credentials_PSW | docker login -u $Dockerhub_Credentials_USR --password-stdin'
+									}
+								}
+							}
+						stage('docker push'){
+							steps{
+								script{
+									sh"docker push ${dockerimage}:${branch}"
+									}
+								}
+							}
+						stage('image run'){
+							steps{
+								script{
+									sh "docker run -itd -p 3000:3000 ${dockerImage}:${branch}"
+									}
+								}
+							}
+						}
+						else{
+							echo"No file changed"
+							}
 	}
 }
