@@ -7,9 +7,17 @@ pipeline{
 		Dockerhub_Credentials=credentials("dockerhub")
 		}
 	stages{
-		stage("git checkout"){
+
+		//stage("git checkout"){
+		//	steps{
+		//		checkout scmGit (branches: [[name: '*/13-jenkins-pipeline-branch-commit']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
+		//		}
+		//	}
+		stage("echo"){
 			steps{
-				checkout scmGit (branches: [[name: '*/13-jenkins-pipeline-branch-commit']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
+				script{
+					echo "hello"
+					}
 				}
 			}
 		stage("docker build"){
