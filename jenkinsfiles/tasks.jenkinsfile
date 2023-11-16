@@ -40,10 +40,11 @@ pipeline{
 					}
 				}
 			}
-		stage("Stop Container"){
+		stage("Stop and Remove Container"){
 			steps{
 				script{
 					sh "docker stop task_service"
+					sh "docker rm task_service"
 					}
 				}
 			}
