@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Home isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
-          <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} isAuthenticated={isAuthenticated} />} />
+          <Route path="/dashboard/*" element={<ProtectedRoute component={Dashboard} isAuthenticated={isAuthenticated} />} />
           <Route path="/" element={<Navigate to="/login" />} />
           
         </Routes>
