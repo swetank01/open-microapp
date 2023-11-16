@@ -37,7 +37,15 @@ pipeline{
 		stage("Run user image in container"){
 			steps{
 				script{
-					sh "docker run -itd -p 5000:5000 ${user_image}"
+					sh "docker run --name user_service -itd -p 5000:5000 ${user_image}"
+					}
+				}
+			}
+		stage("Stop container"){
+			steps{
+				script{
+					sh "docker stop user_service"
+					sh "docker rm user_service"
 					}
 				}
 			}
