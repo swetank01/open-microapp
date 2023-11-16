@@ -7,25 +7,10 @@ pipeline{
 		Dockerhub_Credentials=credentials("dockerhub")
 		}
 	stages{
-
-		//stage("git checkout"){
-		//	steps{
-		//		checkout scmGit (branches: [[name: '*/13-jenkins-pipeline-branch-commit']],userRemoteConfigs: [[credentialsId: 'Github_Id', url: 'https://github.com/swetank01/open-microapp.git']])
-		//		}
-		//	}
-		stage("echo"){
-			steps{
-				script{
-					echo "hello"
-					echo "world"
-					}
-				}
-			}
 		stage("docker build"){
 			steps{
 				script{
-					//sh "docker build -t ${task_image}:${env.BRANCH_NAME} -f docker/task.backend.Dockerfile ."
-					//sh "docker build -t ${task_image}:${env.GIT_LOCAL_BRANCH} -f docker/task.backend.Dockerfile ."
+				
 					sh "docker build -t ${task_image}:${branch} -f docker/task.backend.Dockerfile ."
 					sh "echo ${branch}"
 					}
@@ -42,21 +27,23 @@ pipeline{
 		stage("docker push"){
 			steps{
 				script{
-					//sh "docker push ${task_image}:${env_BRANCH_NAME}"
-					//sh "docker push ${task_image}:${env.GIT_LOCAL_BRANCH}"
 					sh "docker push ${task_image}:${branch}"
 					}
 				}
 			}
 		stage("docker run"){
 			steps{
-				script{
-					//sh "docker run -itd -p 50001:5001 ${task_image}:${env_BRANCH_NAME}"
-					//sh "docker run -itd -p 5001:5001 ${task_image}:${env.GIT_LOCAL_BRANCH}"
-					
-					sh "docker run -itd -p 5001:5001 ${task_image}:${branch}"
+				script{					
+					sh "docker run --name task_service -itd -p 5001:5001 ${task_image}:${branch}"
 					sh "echo ${branch}"
 					
+					}
+				}
+			}
+		stage("Stop Container"){
+			steps{
+				script{
+					sh "docker stop task_service"
 					}
 				}
 			}
