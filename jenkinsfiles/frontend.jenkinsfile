@@ -43,7 +43,7 @@ pipeline{
 					}
 		stage('check stage skip'){
 						when{	
-							expression {!currentBuild.changeSets.isEmpty()}
+							expression {currentBuild.changeSets.isEmpty()}
 							}
 						steps{
 							script{
