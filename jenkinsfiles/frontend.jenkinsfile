@@ -84,7 +84,15 @@ pipeline{
 		stage('image run'){
 					steps{
 						script{
-							sh "docker run -itd -p 3000:3000 ${dockerimage}:${branch}"
+							sh "docker run --name frontend_container -itd -p 3000:3000 ${dockerimage}:${branch}"
+							}
+						}
+					}
+		stage('stop container'){
+					steps{
+						script{
+							sh "docker stop frontend_container"
+							sh "docker rm frontend_container"
 							}
 						}
 					}
