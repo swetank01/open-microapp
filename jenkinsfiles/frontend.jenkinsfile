@@ -62,7 +62,7 @@ pipeline{
 					}
 		stage('abort if skipped'){
 						when{
-							expression {env.DOCKER_BUILD_SKIPPED}
+							expression {!env.DOCKER_BUILD_SKIPPED}
 							}
 						steps{
 							script{
