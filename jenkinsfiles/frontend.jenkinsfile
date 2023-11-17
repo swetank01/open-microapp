@@ -1,6 +1,6 @@
 def dockerimage="sewani/frontend_microapp"
 def branch="13-jenkins-pipeline-branch-commit"
-def file=jenkinsfiles/frontend.jenkinsfile
+def file='jenkinsfiles/frontend.jenkinsfile'
 pipeline{
 	agent any 
 	environment{
