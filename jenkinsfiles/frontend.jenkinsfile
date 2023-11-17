@@ -42,17 +42,16 @@ pipeline{
 						}
 					}
 		stage('check stage skip'){
+					when{
+						exxpression {currentBuild.changeSets.isEmpty()}
+					}
 					steps{
 						script{
 							//def csets=currentBuild.changesets
 							//echo "hi ${csets}"
-							if (currentBuild.changeSet.isEmpty()){
-								env.DOCKER_BUILD_SKIPPED=true
-								}
-							else{
-								echo "docker build remain false as there is change is files"
-								}
+							env.DOCKER_BUILD_SKIPPED=true
 							}
+							
 						}
 					}
 		stage('abort if skipped'){
