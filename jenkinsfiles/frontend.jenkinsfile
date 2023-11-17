@@ -61,7 +61,7 @@ pipeline{
 							}
 						steps{
 							script{
-
+								echo "hey ${DOCKER_BUILD_SKIPPED}"
 								echo "no change in files so abort"
 								currentBuild.result="ABORTED"
                                              			error("build aborted as there is no change is specific file")
