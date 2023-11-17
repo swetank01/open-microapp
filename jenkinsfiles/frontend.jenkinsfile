@@ -42,19 +42,19 @@ pipeline{
 						}
 					}
 		stage('check stage skip'){
-					when{
-						expression {currentBuild.changeSets.isEmpty()}
-					}
-					steps{
-						script{
+						when{
+							expression {currentBuild.changeSets.isEmpty()}
+							}
+						steps{
+							script{
 							//def csets=currentBuild.changesets
 							//echo "hi ${csets}"
-							env.DOCKER_BUILD_SKIPPED=true
-							echo "hi ${DOCKER_BUILD_SKIPPED}"
-							}
+								env.DOCKER_BUILD_SKIPPED=true
+								echo "hi ${DOCKER_BUILD_SKIPPED}"
+								}
 							
+							}
 						}
-					}
 		stage('abort if skipped'){
 						when{
 							expression {env.DOCKER_BUILD_SKIPPED}
