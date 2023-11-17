@@ -40,6 +40,30 @@ pipeline{
 							}
 						}
 					}
+		stage('check stage skip'){
+					steps{
+						script{
+							if (currentBuild.changeSets.isEmpty()){
+								env.DOCKER_BUILD_SKIPPED=true
+								}
+							else{
+								echo "docker build remain false as there is change is files"
+								}
+							}
+						}
+					}
+		stage('abort if skipped'){
+						when{
+							expression {env.DOCKER_BUILD_SKIPPED==true}
+							}
+						steps{
+							script{
+								echo "no change in files so abort"
+								currentBuild.result="ABORTED"
+                                             			error("build aborted as there is no change is specific file")
+								}
+							}
+					}
 		stage('docker login'){
 					steps{
 						script{
