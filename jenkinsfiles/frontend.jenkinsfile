@@ -50,6 +50,7 @@ pipeline{
 							//def csets=currentBuild.changesets
 							//echo "hi ${csets}"
 							env.DOCKER_BUILD_SKIPPED=true
+							echo "hi ${DOCKER_BUILD_SKIPPED}"
 							}
 							
 						}
@@ -60,6 +61,7 @@ pipeline{
 							}
 						steps{
 							script{
+
 								echo "no change in files so abort"
 								currentBuild.result="ABORTED"
                                              			error("build aborted as there is no change is specific file")
