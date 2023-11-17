@@ -8,27 +8,28 @@ pipeline{
 		//Dockerhub_Credentials=credentials('Docker')
 		}
 	stages{
-		stage('check code change'){
-			steps{
-				script{
+	//	stage('check code change'){
+	//		steps{
+	//			script{
 					//def filechanged1=sh "git diff app-front/package*.json"
 					//def filechanged2=sh "git diff jenkinsfiles/frontend.jenkinsfile"
 					//def filechanged1 = sh(script: "git diff app-front/package*.json", returnStdout: true).trim()
                     			//def filechanged2 = sh(script: "git diff jenkinsfiles/frontend.jenkinsfile", returnStdout: true).trim()
-					def filechange1 = sh (script: "git diff  --name-only HEAD^..HEAD | grep \"${file}\"", returnStatus: true)
-					echo "hi ${filechange1}"
-					if (filechange1 == 0){
-						echo "file changed processing with build..."
-							}
-					else {
-						echo "file not changed"
-						currentBuild.result="ABORTED"
-						error("build aborted as there is no change is specific file")
-					}
-				}
-			}
-		}
+	//				def filechange1 = sh (script: "git diff  --name-only HEAD^..HEAD | grep \"${file}\"", returnStatus: true)
+	//				echo "hi ${filechange1}"
+	//				if (filechange1 == 0){
+	//					echo "file changed processing with build..."
+	//						}
+	//				else {
+	//					echo "file not changed"
+	//					currentBuild.result="ABORTED"
+	//					error("build aborted as there is no change is specific file")
+	//				}
+	//			}
+	//		}
+	//	}
 		stage('docker build'){
+					when { changeset "*/jenkinsfiles/**"} 
 					steps{
 						script{
 							sh "docker build -t ${dockerimage}:${branch} -f docker/frontend.Dockerfile ."
