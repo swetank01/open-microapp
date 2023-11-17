@@ -16,7 +16,7 @@ pipeline{
 					//def filechanged1 = sh(script: "git diff app-front/package*.json", returnStdout: true).trim()
                     			//def filechanged2 = sh(script: "git diff jenkinsfiles/frontend.jenkinsfile", returnStdout: true).trim()
 					def filechange1 = sh(script: "git diff -- name-only HEAD^..HEAD | grep ${file}", returnStatus: true)
-					echo "hi"
+					echo "hi ${filechange1}"
 					if (filechange1 == 0){
 						echo "file changed processing with build..."
 							}
