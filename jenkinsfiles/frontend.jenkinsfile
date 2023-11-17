@@ -43,7 +43,7 @@ pipeline{
 					}
 		stage('check stage skip'){
 						when{	
-							expression {currentBuild.resulrIsBetterOrEqualTo('SUCCESS')}
+							expression {currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 							}
 						steps{
 							script{
