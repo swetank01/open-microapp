@@ -52,11 +52,9 @@ pipeline{
 		stage('image run'){
 					steps{
 						script{
-							sh "docker run -itd -p 3000:3000 ${dockerImage}:${branch}"
+							sh "docker run -itd -p 3000:3000 ${dockerimage}:${branch}"
 							}
 						}
 					}
-					
-					
 				}
 			}
