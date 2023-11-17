@@ -43,7 +43,7 @@ pipeline{
 		stage('check stage skip'){
 					steps{
 						script{
-							def csets=currentBuild.changesets.isEmpty()
+							def csets=currentBuild.changesets
 							echo "hi ${csets}"
 							if (currentBuild.changeSets.isEmpty()){
 								env.DOCKER_BUILD_SKIPPED=true
