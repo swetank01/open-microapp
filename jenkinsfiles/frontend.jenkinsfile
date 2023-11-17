@@ -1,5 +1,6 @@
 def dockerimage="sewani/frontend_microapp"
 def branch="13-jenkins-pipeline-branch-commit"
+def file="jenkinsfiles/frontend.jenkinsfile"
 pipeline{
 	agent any 
 	environment{
@@ -14,7 +15,7 @@ pipeline{
 					//def filechanged2=sh "git diff jenkinsfiles/frontend.jenkinsfile"
 					//def filechanged1 = sh(script: "git diff app-front/package*.json", returnStdout: true).trim()
                     			//def filechanged2 = sh(script: "git diff jenkinsfiles/frontend.jenkinsfile", returnStdout: true).trim()
-					def filechange1 = sh(script: "git diff -- name-only HEAD^..HEAD | grep jenkinsfiles/frontend.jenkinsfile", returnStatus: true)
+					def filechange1 = sh(script: "git diff -- name-only HEAD^..HEAD | grep ${file}, returnStatus: true)
 					if (filechange1 == 0){
 						echo "file changed processing with build..."
 							}
