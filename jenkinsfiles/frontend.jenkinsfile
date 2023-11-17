@@ -30,8 +30,10 @@ pipeline{
 	//	}
 		stage('docker build'){
 					 when {
-        					changeset "*/jenkinsfiles/**"
-    					} 
+    						anyOf {
+        						changeset "jenkinsfiles/**"
+    							}
+						} 
 					steps{
 						script{
 							sh "docker build -t ${dockerimage}:${branch} -f docker/frontend.Dockerfile ."
