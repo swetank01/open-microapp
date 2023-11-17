@@ -4,7 +4,7 @@ def file="jenkinsfiles/frontend.jenkinsfile"
 pipeline{
 	agent any 
 	environment{
-		//DOCKER_BUILD_SKIPPED=false
+		
 		Dockerhub_Credentials=credentials('dockerhub')
 		//Dockerhub_Credentials=credentials('Docker')
 		}
@@ -47,8 +47,7 @@ pipeline{
 							}
 						steps{
 							script{
-							//def csets=currentBuild.changesets
-							//echo "hi ${csets}"
+							
 								if(currentBuild.changeSets.isEmpty()){
 									env.DOCKER_BUILD_SKIPPED=true
 									echo "hi ${DOCKER_BUILD_SKIPPED}"
