@@ -42,8 +42,8 @@ pipeline{
 						}
 					}
 		stage('check stage skip'){
-						when{	echo "Checking for changes: ${currentBuild.changeSets.isEmpty()}"
-							expression {currentBuild.changeSets.isEmpty()}
+						when{	
+							expression {!currentBuild.changeSets.isEmpty()}
 							}
 						steps{
 							script{
