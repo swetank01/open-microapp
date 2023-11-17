@@ -46,7 +46,7 @@ pipeline{
 						script{
 							//def csets=currentBuild.changesets
 							//echo "hi ${csets}"
-							if (currentBuild.changeSets.isEmpty()){
+							if (currentBuild.changeSet.isEmpty()){
 								env.DOCKER_BUILD_SKIPPED=true
 								}
 							else{
