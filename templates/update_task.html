@@ -4,15 +4,18 @@
     <title>Update Task</title>
 </head>
 <body>
-    <h2>Update Task</h2>
-    <form action="/update_task/{{ task_id }}" method="POST">
+    <h1>Update Task</h1>
+    <form action="/update_task/{{ task.id }}" method="POST">
         <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" value=""><br>
+        <input type="text" id="title" name="title" value="{{ task.title }}"><br>
+
         <label for="description">Description:</label><br>
-        <textarea id="description" name="description"></textarea><br>
+        <textarea id="description" name="description">{{ task.description }}</textarea><br>
+
         <label for="completed">Completed:</label>
-        <input type="checkbox" id="completed" name="completed" value="true"><br>
-        <input type="submit" value="Update Task">
+        <input type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %}><br>
+
+        <input type="submit" value="Update">
     </form>
 </body>
 </html>
