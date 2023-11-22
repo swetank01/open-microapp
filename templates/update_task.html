@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Task</title>
+</head>
+<body>
+    <h2>Update Task</h2>
+    <form action="/update_task/{{ task_id }}" method="POST">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value=""><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br>
+        <label for="completed">Completed:</label>
+        <input type="checkbox" id="completed" name="completed" value="true"><br>
+        <input type="submit" value="Update Task">
+    </form>
+</body>
+</html>

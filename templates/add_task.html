@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Task</title>
+</head>
+<body>
+    <h1>Add Task</h1>
+    <form action="/add_task" method="post">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br>
+
+        <label for="completed">Completed:</label>
+        <input type="checkbox" id="completed" name="completed" value="true"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
