@@ -24,3 +24,9 @@ source venv/bin/activate
 *After this perform test case: [user-authenciation-api](../Docs/DevDocs/testing/user-authenciation-api.md)*
 
 
+## 2. App Front Service:
+```
+cd app-front 
+npm install 
+npm start
+```
