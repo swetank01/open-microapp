@@ -8,15 +8,33 @@ python3 user_service.py
 
 ### Create User
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"username":"newuser","password":"newpassword"}' http://localhost:5000/register
+curl -X POST -H "Content-Type: application/json" -d '{"username": "testuser", "password": "testpassword"}' http://localhost:5000/register
+```
+###### output: 
+```
+{"message":"User registered successfully"}
 ```
 
 ### User Login and Get JWT Token:
 ```
-TOKEN=$(curl -X POST -H "Content-Type: application/json" -d '{"username":"newuser","password":"newpassword"}' http://localhost:5000/login | jq -r '.access_token')
+curl -X POST -H "Content-Type: application/json" -d '{"username": "testuser", "password": "testpassword"}' http://localhost:5000/login
+```
+###### output: 
+```
+{"access_token":"your_access_token"}
+```
+##### this will print out access_token for you that you can put into env variable:
+
+```
+export YOUR_ACCESS_TOKEN='your-access_token'
 ```
 
 ### Authenticated Request to a Protected Endpoint:
 ```
-curl -X GET -H "Authorization: Bearer $TOKEN" http://localhost:5000/protected
+curl -X GET -H "Authorization: Bearer $YOUR_ACCESS_TOKEN" http://localhost:5000/protected
+```
+
+###### output: 
+```
+{"logged_in_as":3}
 ```
