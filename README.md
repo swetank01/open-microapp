@@ -7,3 +7,5 @@
 - Basic understanding of Python and JavaScript.
 - Python and Node.js installed on your system.
 - Familiarity with RESTful APIs.
+
+#### [How to Run this Project](./Docs/Setup.md)
