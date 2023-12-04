@@ -20,7 +20,9 @@ with app.app_context():
 @app.route('/tasks', methods=['GET'])
 def all_tasks():
     tasks = Task.query.all()
-    return render_template('view_task.html', tasks=tasks)
+    task_list = [task.serialize() for task in tasks]  # Assuming Task has a serialize method
+
+    return jsonify(task_list)
 
 
 @app.route('/update_task/<int:task_id>', methods=['GET'])
